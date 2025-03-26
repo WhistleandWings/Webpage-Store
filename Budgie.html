@@ -1,0 +1,231 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Image Creation</title>
+    <link href="css/style.css" rel="stylesheet" type="text/css" />
+    <div class="header">
+      <img src="images/DTportfolio_header.png">
+    </div>
+    <script>
+      // Initialize an empty cart if it doesn't exist
+      let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+      // Function to add items to the cart
+      function addToCart(itemName, selectedOption, price) {
+        // Create item object
+        const item = {
+          name: `${itemName} - ${selectedOption}`,
+          price: price
+        };
+
+        // Check if the item already exists in the cart
+        const itemExists = cart.some(existingItem => existingItem.name === item.name);
+
+        if (itemExists) {
+          alert(`Selected item is already in your cart.`);
+        } else {
+          cart.push(item);
+          localStorage.setItem('cart', JSON.stringify(cart));  // Save the cart to localStorage
+          alert(`${item.name} has been added to your cart!`);
+        }
+      }
+
+      // Function to get item details from the button
+      function handleBuyButtonClick(event) {
+        // Get item name and price from the parent of the clicked button
+        const itemDiv = event.target.closest('.budgie-info');
+        const itemName = itemDiv.querySelector('h3').textContent.split(' - $')[0];
+        const itemPrice = parseFloat(itemDiv.querySelector('h3').textContent.split(' - $')[1]);
+
+        addToCart(itemName, "Standard", itemPrice);
+      }
+
+      // Add event listeners to all "Buy Now" buttons once the page is loaded
+      window.onload = function() {
+        const buyButtons = document.querySelectorAll('.buy-btn');
+        buyButtons.forEach(button => {
+          button.addEventListener('click', handleBuyButtonClick);
+        });
+      };
+    </script>
+  </head>
+  <body>
+    <nav>
+      <ul>
+        <li><a href="Cockatiel.html">Cockatiel</a></li>
+        <li id='active'><a href="index.html">All</a></li>
+        <li><a href="Budgies.html">Budgie</a></li>
+      </ul>
+    </nav>
+    <nav2>
+      <ul>
+        <li><a href="careguide.html">Care Guide</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li id='active'><a href="index.html">Store</a></li>
+        <li><a href="adoption.html">Adoption</a></li>
+        <li><a href="rehome.html">Rehoming</a></li>
+        <li><a href="cart.html">Cart</a></li>
+      </ul>
+    </nav2>
+    <h1>* STORE *</h1>
+    <div class='container'>
+      <!-- item 1 starts here -->
+      <div class='item'>
+        <img src="images/BirdUnavailable.png" alt="Bird 2">
+        <div class='budgie-info'>
+          <h3>BirdUnavailable - $00.00</h3>
+          <p>We currently have no budgies to fill this spot. Coming next year, we should have more darlings to sell. If you are unable to meet a birds needs or need to rehome your bird really quick, contact us and we will happily look after and rehome your bird for you..</p>
+          <button class="buy-btn">Buy Now</button>
+        </div>       
+      </div>
+      <!-- end of item 1 -->
+
+      <!-- item 2 starts here -->
+      <!-- item 4 starts here -->
+      <div class='item'>
+        <img src="images/BirdUnavailable.png" alt="Bird 2">
+        <div class='budgie-info'>
+          <h3>BirdUnavailable - $00.00</h3>
+          <p>We currently have no budgies to fill this spot. Coming next year, we should have more darlings to sell. If you are unable to meet a birds needs or need to rehome your bird really quick, contact us and we will happily look after and rehome your bird for you..</p>
+          <button class="buy-btn">Buy Now</button>
+        </div>       
+      </div>
+      <!-- end of item 2 -->
+
+      <!-- item 3 starts here -->
+        <!-- item 4 starts here -->
+        <div class='item'>
+          <img src="images/BirdUnavailable.png" alt="please replace me">
+          <div class='budgie-info'>
+            <h3>BirdUnavailable - $00.00</h3>
+            <p>We currently have no budgies to fill this spot. Coming next year, we should have more darlings to sell. If you are unable to meet a birds needs or need to rehome your bird really quick, contact us and we will happily look after and rehome your bird for you.</p>
+            <button class="buy-btn">Buy Now</button>
+          </div>       
+        </div>
+      </div>
+      <!-- end of item 3 -->
+
+      <!-- Feed Package -->
+        <div class="item-info">
+          <h3>Feed Package - $152.99 to $645.99</h3>
+          <p>The 'Feed Package' contains all the healthy feed and treats for a Budgie! Feed that could be used for days and give plenty of time to healthily transfer the birds diets from a pellet to seed diet.<br>
+            <b>Small-Home Package:</b> Unavailable (No current stock)
+            <br>
+            <b>Happy-Home Package:</b> 10kg Vetafarm Nutriblend Mini, Topflight Budgie Seed 5kg, Millet 10 pack, Seed bell, 5 Cuddle fish bones.
+            <br>
+            <b>Large-Home Package:</b> 20kg Vetafarm Nutriblend Mini, Topflight Budgie Seed 10kg, Millet 25 pack, 3 Seed bells, 10 Cuddle fish bones.
+          </p>
+
+        <label for="starters-options"><b>Select an option:</b></label>
+        <select id="starters-options">
+          <option value="Basic" data-price="235.99">Small-Home Package - $235.99</option>
+          <option value="Plus" data-price="425.99"> Happy-Package - $425.99</option>
+          <option value="Ultimate" data-price="645.99">Large-Home Package - $645.99</option>
+        </select>
+
+        <button class="buy-btn" onclick="addToCart('Feed Package', document.getElementById('starters-options').value, parseFloat(document.getElementById('starters-options').selectedOptions[0].getAttribute('data-price')))">Buy Now</button>
+        <p><br><br></p>
+      </div>
+    </div>
+
+
+      <!-- item 4 starts here -->
+        <div class='container'>
+        <!-- item 4 starts here -->
+        <div class='item'>
+          <img src="images/BirdUnavailable.png" alt="please replace me">
+          <div class='budgie-info'>
+            <h3>BirdUnavailable - $00.00</h3>
+            <p>We currently have no budgies to fill this spot. Coming next year, we should have more darlings to sell. If you are unable to meet a birds needs or need to rehome your bird really quick, contact us and we will happily look after and rehome your bird for you.</p>
+            <button class="buy-btn">Buy Now</button>
+          </div>       
+        </div>
+      <!-- end of item 4 -->
+
+      <!-- item 5 starts here -->
+      <div class='item'>
+        <img src="images/BirdUnavailable.png" alt="Bird 2">
+        <div class='budgie-info'>
+          <h3>BirdUnavailable - $00.00</h3>
+          <p>We currently have no budgies to fill this spot. Coming next year, we should have more darlings to sell. If you are unable to meet a birds needs or need to rehome your bird really quick, contact us and we will happily look after and rehome your bird for you..</p>
+          <button class="buy-btn">Buy Now</button>
+        </div>       
+      </div>
+      <!-- end of item 5 -->
+
+      <!-- Starters Package -->
+          <div class="item-info">
+            <h3><b>Starter Packages - $00.00 to $00.00</b></h3>
+            <p><b>The 'Starter Packages' contain everything you need to take care of and keep healthy Budgies within your home!</b><br>
+            <br><b>Beginners Package:</b> Unavailable (No current stock)
+            <br><b>Happy-Bird Package:</b> Unavailable (No current stock)
+            <br><b>Packed-Home Package:</b> Unavailable (No current stock)
+
+            <label for="starters-options"><b>Select an option:</b></label>
+            <select id="starters-options">
+              <option value="Basic" data-price="00.00">Beginners Package - $00.00</option>
+              <option value="Plus" data-price="00.00">Happy-Bird Package - $00.00</option>
+              <option value="Ultimate" data-price="00.00">Packed-Home Package - $00.00</option>
+            </select>
+
+            <button class="buy-btn" onclick="addToCart('Starters Package', document.getElementById('starters-options').value, parseFloat(document.getElementById('starters-options').selectedOptions[0].getAttribute('data-price')))">Buy Now</button>
+            <p><br><br></p>
+          </div>
+        </div>
+    <div class='container'>
+      <!-- item 6 starts here -->
+      <div class='item'>
+        <img src="images/BirdUnavailable.png" alt="Bird 2">
+        <div class='budgie-info'>
+          <h3>BirdUnavailable - $00.00</h3>
+          <p>We currently have no budgies to fill this spot. Coming next year, we should have more darlings to sell. If you are unable to meet a birds needs or need to rehome your bird really quick, contact us and we will happily look after and rehome your bird for you..</p>
+          <button class="buy-btn">Buy Now</button>
+        </div>       
+      </div>
+      <!-- end of item 6 -->
+
+      <!-- item 7 starts here -->
+      <div class='item'>
+        <img src="images/BirdUnavailable.png" alt="Bird 2">
+        <div class='budgie-info'>
+          <h3>BirdUnavailable - $00.00</h3>
+          <p>We currently have no budgies to fill this spot. Coming next year, we should have more darlings to sell. If you are unable to meet a birds needs or need to rehome your bird really quick, contact us and we will happily look after and rehome your bird for you..</p>
+          <button class="buy-btn">Buy Now</button>
+        </div>       
+      </div>
+      <!-- end of item 7 -->
+
+      <!-- item 8 starts here -->
+      <div class='item'>
+        <img src="images/BirdUnavailable.png" alt="Bird 2">
+        <div class='budgie-info'>
+          <h3>BirdUnavailable - $00.00</h3>
+          <p>We currently have no budgies to fill this spot. Coming next year, we should have more darlings to sell. If you are unable to meet a birds needs or need to rehome your bird really quick, contact us and we will happily look after and rehome your bird for you..</p>
+          <button class="buy-btn">Buy Now</button>
+        </div>       
+      </div>
+    </div>
+
+      <!-- end of item 8 -->
+        <div class="exclaimer">
+          <h3>!Exclaimer!</h3>
+          <p>
+            All These Budgies are very loved and we only wish they go to homes who have done their utmost research. We do provide some information on how to cater to a budgie but do not rely on information from a single site. As far as you are aware, the site could be misinformed and wrong, so make sure to compare information from multiple sites before seeing it as truth.<br><br>
+            
+          </p>
+        </div>
+
+            <section>
+                <h2>Contact Us</h2>
+                <p class="contact-info">
+                    Get in touch with any questions or inquiries! Feel free to text me at <strong>6420 4045 3382</strong> or email <strong>whistleandwings@gmail.com</strong>. I'll respond when I'm available!
+                </p>
+            </section>
+        </main>
+
+        <footer>
+            <p>&copy; 2024 Whistle & Wings. All rights reserved.</p>
+        </footer>
+    </body>
+    </html>

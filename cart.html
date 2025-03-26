@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Cart</title>
+    <link href="css/style.css" rel="stylesheet" type="text/css" />
+    <div class="header">
+      <img src="images/DTportfolio_header.png">
+    </div>
+    <script>
+      let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+      function displayCart() {
+        const cartContainer = document.querySelector('.cart-items');
+        if (cart.length === 0) {
+          cartContainer.innerHTML = '<p>Your cart is empty.</p>';
+        } else {
+          let total = 0;
+          cartContainer.innerHTML = ''; // Clear existing cart items
+          cart.forEach((item, index) => {
+            const itemDiv = document.createElement('div');
+            itemDiv.classList.add('cart-item');
+            itemDiv.innerHTML = `
+              <input type="checkbox" class="item-checkbox" data-index="${index}">
+              <p>${item.name} - $${item.price.toFixed(2)}</p>
+            `;
+            cartContainer.appendChild(itemDiv);
+            total += parseFloat(item.price);  // Ensure price is treated as a number
+          });
+
+          // Display the total cost
+          const totalDiv = document.createElement('div');
+          totalDiv.classList.add('total');
+          totalDiv.innerHTML = `<b>Total - $${total.toFixed(2)}</b>`;
+          cartContainer.appendChild(totalDiv);
+
+          // Add the "Remove Selected" button
+          const removeButtonDiv = document.createElement('div');
+          removeButtonDiv.innerHTML = `
+            <button class="remove-selected-btn">Remove Selected</button>
+          `;
+          cartContainer.appendChild(removeButtonDiv);
+
+          // Add the "Purchase" button if the cart is not empty
+          const purchaseButtonDiv = document.createElement('div');
+          purchaseButtonDiv.innerHTML = `
+            <button class="purchase-btn">Proceed to Purchase</button>
+          `;
+          cartContainer.appendChild(purchaseButtonDiv);
+
+          // Add functionality to redirect to purchase.html
+          const purchaseButton = document.querySelector('.purchase-btn');
+          purchaseButton.addEventListener('click', () => {
+            // Optional: Clear the cart after purchase (uncomment to clear)
+            // localStorage.removeItem('cart');
+
+            // Redirect to purchase page
+            window.location.href = 'purchase.html';
+          });
+        }
+      }
+
+      function removeSelectedItems() {
+        const checkedItems = document.querySelectorAll('.item-checkbox:checked');
+        const indicesToRemove = [];
+
+        checkedItems.forEach(checkbox => {
+          indicesToRemove.push(parseInt(checkbox.getAttribute('data-index')));
+        });
+
+        cart = cart.filter((item, index) => !indicesToRemove.includes(index));
+
+        localStorage.setItem('cart', JSON.stringify(cart));
+
+        displayCart();
+      }
+
+      window.onload = function() {
+        displayCart();
+
+        const removeButton = document.querySelector('.remove-selected-btn');
+        if (removeButton) {
+          removeButton.addEventListener('click', removeSelectedItems);
+        }
+      };
+    </script>
+  </head>
+  <body>
+    <nav>
+      <ul>
+        <li><a href="careguide.html">Care Guide</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="index.html">Store</a></li>
+        <li><a href="adoption.html">Adoption</a></li>
+        <li><a href="rehome.html">Rehoming</a></li>
+        <li id='active'><a href="cart.html">Cart</a></li>
+      </ul>
+    </nav>
+    <h1>Cart</h1>
+
+    <div class="cart-items">
+      <!-- Cart items will be displayed here -->
+    </div>
+
+    <div class="exclaimer">
+      <h3>!Exclaimer!</h3>
+      <p>
+        All these birds are very loved and we only wish they go to homes who have done their utmost research. We do provide some information on how to cater to a bird but do not rely on information from a single site. As far as you are aware, the site could be misinformed and wrong, so make sure to compare information from multiple sources before seeing it as truth.
+      </p>
+    </div>
+
+            <section>
+                <h2>Contact Us</h2>
+                <p class="contact-info">
+                    Get in touch with any questions or inquiries! Feel free to text me at <strong>6420 4045 3382</strong> or email <strong>whistleandwings@gmail.com</strong>. I'll respond when I'm available!
+                </p>
+            </section>
+        </main>
+
+        <footer>
+            <p>&copy; 2024 Whistle & Wings. All rights reserved.</p>
+        </footer>
+    </body>
+    </html>

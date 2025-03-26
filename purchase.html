@@ -1,0 +1,93 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Purchase</title>
+    <link href="css/style.css" rel="stylesheet" type="text/css" />
+    <div class="header">
+      <img src="images/DTportfolio_header.png">
+    </div>
+    <script>
+      let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+      function displayCart() {
+        const cartContainer = document.querySelector('.cart-items');
+        if (cart.length === 0) {
+          cartContainer.innerHTML = '<p>Your cart is empty.</p>';
+        } else {
+          let total = 0;
+          cartContainer.innerHTML = ''; // Clear existing cart items
+          cart.forEach((item, index) => {
+            const itemDiv = document.createElement('div');
+            itemDiv.classList.add('cart-item');
+            itemDiv.innerHTML = `
+              <p>${item.name} - $${item.price}</p>
+            `;
+            cartContainer.appendChild(itemDiv);
+            total += item.price;
+          });
+
+          // Display the total cost
+          const totalDiv = document.createElement('div');
+          totalDiv.classList.add('total');
+          totalDiv.innerHTML = `<b>Total - $${total.toFixed(2)}</b>`;
+          cartContainer.appendChild(totalDiv);
+        }
+      }
+
+      window.onload = function() {
+        displayCart();
+      };
+    </script>
+  </head>
+  <body>
+    <nav>
+      <ul>
+        <li><a href="careguide.html">Care Guide</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="index.html">Store</a></li>
+        <li><a href="adoption.html">Adoption</a></li>
+        <li><a href="rehome.html">Rehoming</a></li>
+        <li id="active"><a href="cart.html">Cart</a></li>
+      </ul>
+    </nav>
+    <h1>Purchase Summary</h1>
+
+    <div class="cart-items">
+      
+    </div>
+
+    <div class="exclaimer">
+      <h3>!Exclaimer!</h3>
+      <p>
+        All These Budgies are very loved and we only wish they go to homes who have done their utmost research. We do provide some information on how to cater to a budgie but do not rely on information from a single site. As far as you are aware, the site could be misinformed and wrong, so make sure to compare information from multiple sites before seeing it as truth.<br><br>
+        A budgie, two, three, or more is a great pet for almost every home! As long as you make the right commitments!
+      </p>
+    </div>
+
+    <div style="text-align: center; margin: 20px;">
+      <a href="confirmpurchase.html">
+      <button onclick="openPages()" style="background-color: #3498db; color: white; font-size: 16px; padding: 15px 30px; border: none; border-radius: 5px; cursor: pointer; transition: background-color 0.3s;">
+        Book Purchase
+      </button>
+    </div>
+
+    <script>
+      function openPages() {
+        // Open both pages simultaneously in new tabs
+        window.open('https://forms.gle/FzjB2cCqGcmKDJwy7', '_blank');
+      }
+    </script>
+            <section>
+                <h2>Contact Us</h2>
+                <p class="contact-info">
+                   Get in touch with any questions or inquiries! Feel free to text me at <strong>6420 4045 3382</strong> or email <strong>whistleandwings@gmail.com</strong>. I'll respond when I'm available!
+                </p>
+            </section>
+        </main>
+
+        <footer>
+            <p>&copy; 2024 Whistle & Wings. All rights reserved.</p>
+        </footer>
+    </body>
+    </html>
